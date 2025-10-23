@@ -143,11 +143,14 @@
       opacity: 0;
     }
 
-    .popup img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+.popup img {
+  width: 100%;
+  height: auto;           /* Lascia che l’altezza si adatti automaticamente */
+  object-fit: contain;    /* Mostra tutta l’immagine intera */
+  display: block;
+  background-color: #000; /* Opzionale: colore di sfondo se l’immagine non riempie */
+}
+
 
     .popup-content {
       padding: 1.5rem;
