@@ -95,6 +95,154 @@
       </div>
     </div>
     <main id="barba-wrapper" class="barba-container">
+
+      <style>
+      button {
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* ====== Overlay ====== */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 1000;
+      opacity: 1;
+      pointer-events: all;
+      transition: opacity 0.3s ease;
+    }
+
+    .overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ====== Popup ====== */
+    .popup {
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      max-width: 420px;
+      width: 100%;
+      overflow: hidden;
+      transform: scale(1);
+      opacity: 1;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      position: relative;
+    }
+
+    .overlay.hidden .popup {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+
+    .popup img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .popup-content {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .popup h2 {
+      font-size: 1.5rem;
+      color: #111;
+      margin-bottom: 0.5rem;
+    }
+
+    .popup p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .popup .cta-btn {
+      background-color: #2563eb;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: background-color 0.25s ease;
+    }
+
+    .popup .cta-btn:hover {
+      background-color: #1e4ed8;
+    }
+
+    /* ====== Pulsante chiusura ====== */
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 14px;
+      font-size: 1.2rem;
+      color: #555;
+      background: none;
+      transition: color 0.25s ease;
+    }
+
+    .close-btn:hover {
+      color: #111;
+    }
+
+    /* ====== Responsività ====== */
+    @media (max-width: 480px) {
+      .popup img {
+        height: 160px;
+      }
+
+      .popup h2 {
+        font-size: 1.25rem;
+      }
+
+      .popup p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay + Popup (visibile di default) -->
+  <div id="popupOverlay" class="overlay">
+    <div class="popup" role="dialog" aria-modal="true">
+      <button id="closePopup" class="close-btn" aria-label="Chiudi pop-up">✕</button>
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+           alt="Illustrazione promozionale">
+      <div class="popup-content">
+        <h2>Scopri la nostra nuova offerta!</h2>
+        <p>
+          Unisciti a migliaia di utenti che hanno già migliorato la loro esperienza.
+          Approfitta subito della promozione esclusiva!
+        </p>
+        <button class="cta-btn">Scopri di più</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById("popupOverlay");
+    const closeBtn = document.getElementById("closePopup");
+
+    closeBtn.addEventListener("click", () => overlay.classList.add("hidden"));
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) overlay.classList.add("hidden");
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") overlay.classList.add("hidden");
+    });
+  </script>
       <div class="uui-page-padding">
         <div class="uui-container-large">
           <div class="uui-padding-vertical-xhuge">
